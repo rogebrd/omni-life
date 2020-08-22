@@ -5,8 +5,8 @@ let db = new sqlite3.Database('./db/transactions.db', db_error_handler);
 db.run(
     `CREATE TABLE IF NOT EXISTS transactions(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        account_id INTEGER NOT NULL,
-        category_id INTEGER NOT NULL,
+        accountId INTEGER NOT NULL,
+        categoryId INTEGER NOT NULL,
         date DATE NOT NULL,
         vendor STRING NOT NULL,
         amount REAL NOT NULL
@@ -41,78 +41,80 @@ class Transaction {
     }
 }
 
-function select_transactions(callback) {
+function select_transactions(callback, err_callback) {
     db.all('SELECT * FROM transactions ORDER BY id DESC',
         (err, rows) => {
             if (err) {
-                console.error(err.message);
+                err_callback(err);
+            } else {
+                results = rows.map((row) => {
+                    return new Transaction(row.id, row.date, row.accountId, row.categoryId, row.vendor, row.amount);
+                });
+                callback(results);
             }
-            results = rows.map((row) => {
-                return new Transaction(row.id, row.date, row.account_id, row.category_id, row.vendor, row.amount);
-            });
-            callback(results);
         }
     );
 }
 
-function select_accounts(callback) {
+function select_accounts(callback, err_callback) {
     db.all('SELECT * FROM accounts ORDER BY id DESC',
         (err, rows) => {
             if (err) {
-                console.error(err.message);
+                err_callback(err);
+            } else {
+                callback(rows);
             }
-            callback(rows);
         }
     );
 }
 
-function select_categories(callback) {
+function select_categories(callback, err_callback) {
     db.all('SELECT * FROM categories ORDER BY id DESC',
         (err, rows) => {
             if (err) {
-                console.error(err.message);
+                err_callback(err);
+            } else {
+                callback(rows);
             }
-            callback(rows);
         }
     );
 }
 
-function close() {
-    db.close(db_error_handler);
+function close(err_callback) {
+    db.close(err_callback);
 }
 
-function insert_transaction(date, account_id, category_id, vendor, amount) {
+function insert_transaction(date, account_id, category_id, vendor, amount, err_callback) {
     db.run(
         `INSERT INTO transactions
-        (account_id, category_id, date, vendor, amount)
+        (accountId, categoryId, date, vendor, amount)
         VALUES(${account_id}, ${category_id}, "${date.toISOString()}", "${vendor}", ${amount});`,
-        db_error_handler
+        err_callback
     );
 }
 
-function insert_account(account_name) {
+function insert_account(account_name, err_callback) {
     db.run(
         `INSERT INTO accounts
         (name)
         VALUES("${account_name}")`,
-        db_error_handler
+        err_callback
     );
 }
 
-function insert_category(category_name) {
+function insert_category(category_name, err_callback) {
     db.run(
         `INSERT INTO categories
         (name)
         VALUES("${category_name}")`,
-        db_error_handler
+        err_callback
     );
 }
 
 function db_error_handler(err) {
     if (err) {
-        console.error(err.message);
+        throw err;
     }
-    console.log("Success");
 }
 
 module.exports = {
