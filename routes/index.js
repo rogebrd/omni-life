@@ -8,13 +8,14 @@ router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/add', function (req, res, next) {
-  db.insert_transaction(new Date, 2, "tesla", "420");
+router.post('/add', function (req, res, next) {
+  db.insert_transaction(new Date(req.body.date), req.body.account_id, req.body.vendor, req.body.amount);
   res.send("added!");
 });
 
-router.get('/add_account', function (req, res, next) {
-  db.insert_account("Chase");
+router.post('/add_account', function (req, res, next) {
+  var account = req.body.account_name
+  db.insert_account(account);
   res.send("added!");
 });
 
