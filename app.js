@@ -4,11 +4,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+// Namespace Routers
 var indexRouter = require('./routes/index');
 var transactionRouter = require('./routes/transactions');
 var accountRouter = require('./routes/accounts');
-
-var db = require('./db');
+var categoryRouter = require('./routes/categories');
 
 var app = express();
 
@@ -22,9 +22,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Namespace Configurations
 app.use('/', indexRouter);
 app.use('/transactions', transactionRouter);
 app.use('/accounts', accountRouter);
+app.use('/categories', categoryRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -11,12 +11,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:3000/select",
+					"raw": "localhost:3000/transactions/select",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
+						"transactions",
 						"select"
 					]
 				}
@@ -29,13 +30,33 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:3000/select_accounts",
+					"raw": "localhost:3000/accounts/select",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"select_accounts"
+						"accounts",
+						"select"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Select Categories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/categories/select",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"categories",
+						"select"
 					]
 				}
 			},
@@ -55,7 +76,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"date\": \"2020-08-22T14:22:19.831Z\",\n\t\"account_id\": 1,\n\t\"vendor\": \"Panera Bread\",\n\t\"amount\": 123.45\n}",
+					"raw": "{\n\t\"date\": \"2020-08-22T14:22:19.831Z\",\n\t\"account_id\": 1,\n\t\"category_id\": 1,\n\t\"vendor\": \"Panera Bread\",\n\t\"amount\": 123.45\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -63,12 +84,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/add",
+					"raw": "localhost:3000/transactions/add",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
+						"transactions",
 						"add"
 					]
 				}
@@ -97,13 +119,49 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/add_account",
+					"raw": "localhost:3000/accounts/add",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"add_account"
+						"accounts",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Category",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"category_name\": \"Food\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/categories/add",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"categories",
+						"add"
 					]
 				}
 			},
