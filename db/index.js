@@ -32,7 +32,7 @@ class Transaction {
 }
 
 function select_transactions(callback) {
-    db.all('SELECT * FROM transactions ORDER BY date DESC',
+    db.all('SELECT * FROM transactions ORDER BY id DESC',
         (err, rows) => {
             if (err) {
                 console.error(err.message);
