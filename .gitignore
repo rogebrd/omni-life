@@ -1,3 +1,5 @@
+db/transactions.db
+
 # Logs
 logs
 *.log

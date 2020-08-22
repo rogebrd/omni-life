@@ -11,10 +11,23 @@ db.run(
     `CREATE TABLE IF NOT EXISTS transactions(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         date DATE NOT NULL,
-        account STRING NOT NULL,
+        account_id INTEGER NOT NULL,
         vendor STRING NOT NULL,
         amount REAL NOT NULL
-        );`,
+    );`,
+    (err) => {
+        if (err) {
+            console.error(err.message);
+        }
+        console.log("Created Table");
+    }
+);
+
+db.run(
+    `CREATE TABLE IF NOT EXISTS accounts(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    account_name STRING NOT NULL
+  );`,
     (err) => {
         if (err) {
             console.error(err.message);
