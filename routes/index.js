@@ -9,12 +9,12 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/add', function (req, res, next) {
-  db.insert(new Date, 2, "tesla", "420");
+  db.insert_transaction(new Date, 2, "tesla", "420");
   res.send("added!");
 });
 
 router.get('/select', function (req, res, next) {
-  var results = db.select((rows) => {
+  db.select((rows) => {
     res.send(rows);
   });
 });

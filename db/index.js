@@ -47,7 +47,7 @@ class Transaction {
 }
 
 function select(callback) {
-    db.all('SELECT * FROM transactions',
+    db.all('SELECT * FROM transactions ORDER BY id ASC ',
         (err, rows) => {
             if (err) {
                 console.error(err.message);
@@ -69,7 +69,7 @@ function close() {
     });
 }
 
-function insert(date, account_id, vendor, amount) {
+function insert_transaction(date, account_id, vendor, amount) {
     db.run(
         'INSERT INTO transactions' +
         '(date, account_id, vendor, amount)' +
@@ -83,8 +83,23 @@ function insert(date, account_id, vendor, amount) {
     );
 }
 
+function insert_account(account_name) {
+    db.run(
+        `INSERT INTO accounts
+        (account_name)
+        VALUES(${account_name})`,
+        (err) => {
+            if (err) {
+                console.error(err.message);
+            }
+            console.log("Success");
+        }
+    );
+}
+
 module.exports = {
     close: close,
     select: select,
-    insert: insert
+    insert_transaction: insert_transaction,
+    insert_account: insert_account
 };
