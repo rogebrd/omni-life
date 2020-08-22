@@ -13,8 +13,19 @@ router.get('/add', function (req, res, next) {
   res.send("added!");
 });
 
+router.get('/add_account', function (req, res, next) {
+  db.insert_account("Chase");
+  res.send("added!");
+});
+
 router.get('/select', function (req, res, next) {
-  db.select((rows) => {
+  db.select_transactions((rows) => {
+    res.send(rows);
+  });
+});
+
+router.get('/select_accounts', function (req, res, next) {
+  db.select_accounts((rows) => {
     res.send(rows);
   });
 });

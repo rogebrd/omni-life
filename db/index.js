@@ -1,11 +1,6 @@
 const sqlite3 = require('sqlite3').verbose();
 
-let db = new sqlite3.Database('./db/transactions.db', (err) => {
-    if (err) {
-        console.error(err.message);
-    }
-    console.log('Connected to the database.');
-});
+let db = new sqlite3.Database('./db/transactions.db', db_error_handler);
 
 db.run(
     `CREATE TABLE IF NOT EXISTS transactions(
@@ -15,12 +10,7 @@ db.run(
         vendor STRING NOT NULL,
         amount REAL NOT NULL
     );`,
-    (err) => {
-        if (err) {
-            console.error(err.message);
-        }
-        console.log("Created Table");
-    }
+    db_error_handler
 );
 
 db.run(
@@ -28,12 +18,7 @@ db.run(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     account_name STRING NOT NULL
   );`,
-    (err) => {
-        if (err) {
-            console.error(err.message);
-        }
-        console.log("Created Table");
-    }
+    db_error_handler
 );
 
 class Transaction {
@@ -46,8 +31,8 @@ class Transaction {
     }
 }
 
-function select(callback) {
-    db.all('SELECT * FROM transactions ORDER BY id ASC ',
+function select_transactions(callback) {
+    db.all('SELECT * FROM transactions ORDER BY date DESC',
         (err, rows) => {
             if (err) {
                 console.error(err.message);
@@ -60,26 +45,27 @@ function select(callback) {
     );
 }
 
-function close() {
-    db.close((err) => {
-        if (err) {
-            console.error(err.message);
+function select_accounts(callback) {
+    db.all('SELECT * FROM accounts ORDER BY id DESC',
+        (err, rows) => {
+            if (err) {
+                console.error(err.message);
+            }
+            callback(rows);
         }
-        console.log('Disconnected from Database.');
-    });
+    );
+}
+
+function close() {
+    db.close(db_error_handler);
 }
 
 function insert_transaction(date, account_id, vendor, amount) {
     db.run(
-        'INSERT INTO transactions' +
-        '(date, account_id, vendor, amount)' +
-        'VALUES("' + date.toISOString() + '", ' + account_id + ', "' + vendor + '", ' + amount + ');',
-        (err) => {
-            if (err) {
-                console.error(err.message);
-            }
-            console.log("Success");
-        }
+        `INSERT INTO transactions
+        (date, account_id, vendor, amount)
+        VALUES("${date.toISOString()}", ${account_id}, "${vendor}", ${amount});`,
+        db_error_handler
     );
 }
 
@@ -87,19 +73,22 @@ function insert_account(account_name) {
     db.run(
         `INSERT INTO accounts
         (account_name)
-        VALUES(${account_name})`,
-        (err) => {
-            if (err) {
-                console.error(err.message);
-            }
-            console.log("Success");
-        }
+        VALUES("${account_name}")`,
+        db_error_handler
     );
+}
+
+function db_error_handler(err) {
+    if (err) {
+        console.error(err.message);
+    }
+    console.log("Success");
 }
 
 module.exports = {
     close: close,
-    select: select,
+    select_transactions: select_transactions,
+    select_accounts: select_accounts,
     insert_transaction: insert_transaction,
     insert_account: insert_account
 };
