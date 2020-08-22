@@ -9,7 +9,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/add', function (req, res, next) {
-  db.insert();
+  db.insert(new Date, 2, "tesla", "420");
   res.send("added!");
 });
 

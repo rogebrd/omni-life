@@ -69,11 +69,11 @@ function close() {
     });
 }
 
-function insert() {
+function insert(date, account_id, vendor, amount) {
     db.run(
         'INSERT INTO transactions' +
-        '(date, account, vendor, amount)' +
-        'VALUES("' + new Date().toISOString() + '", "chase", "amazon", 100);',
+        '(date, account_id, vendor, amount)' +
+        'VALUES("' + date.toISOString() + '", ' + account_id + ', "' + vendor + '", ' + amount + ');',
         (err) => {
             if (err) {
                 console.error(err.message);
