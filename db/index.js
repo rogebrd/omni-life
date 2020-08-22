@@ -41,73 +41,73 @@ class Transaction {
     }
 }
 
-function select_transactions(callback, err_callback) {
+function select_transactions(callback) {
     db.all('SELECT * FROM transactions ORDER BY id DESC',
-        (err, rows) => {
-            if (err) {
-                err_callback(err);
-            } else {
-                results = rows.map((row) => {
-                    return new Transaction(row.id, row.date, row.accountId, row.categoryId, row.vendor, row.amount);
-                });
-                callback(results);
-            }
-        }
+        callback
     );
 }
 
-function select_accounts(callback, err_callback) {
+function select_accounts(callback) {
     db.all('SELECT * FROM accounts ORDER BY id DESC',
-        (err, rows) => {
-            if (err) {
-                err_callback(err);
-            } else {
-                callback(rows);
-            }
-        }
+        callback
     );
 }
 
-function select_categories(callback, err_callback) {
+function select_categories(callback) {
     db.all('SELECT * FROM categories ORDER BY id DESC',
-        (err, rows) => {
-            if (err) {
-                err_callback(err);
-            } else {
-                callback(rows);
-            }
-        }
+        callback
     );
 }
 
-function close(err_callback) {
-    db.close(err_callback);
+function close(callback) {
+    db.close(callback);
 }
 
-function insert_transaction(date, account_id, category_id, vendor, amount, err_callback) {
+function insert_transaction(date, account_id, category_id, vendor, amount, callback) {
     db.run(
         `INSERT INTO transactions
         (accountId, categoryId, date, vendor, amount)
         VALUES(${account_id}, ${category_id}, "${date.toISOString()}", "${vendor}", ${amount});`,
-        err_callback
+        callback
     );
 }
 
-function insert_account(account_name, err_callback) {
+function insert_account(account_name, callback) {
     db.run(
         `INSERT INTO accounts
         (name)
         VALUES("${account_name}")`,
-        err_callback
+        callback
     );
 }
 
-function insert_category(category_name, err_callback) {
+function insert_category(category_name, callback) {
     db.run(
         `INSERT INTO categories
         (name)
         VALUES("${category_name}")`,
-        err_callback
+        callback
+    );
+}
+
+function delete_account(account_id, callback) {
+    db.run(
+        `DELETE FROM accounts WHERE id = ${account_id}`,
+        callback
+    );
+}
+
+function delete_transaction(transaction_id, callback) {
+    db.run(
+        `DELETE FROM transactions WHERE id = ${transaction_id}`,
+        callback
+    );
+}
+
+function delete_category(category_id, callback) {
+    db.run(
+        `DELETE FROM categories WHERE id = ${category_id}`,
+        callback
     );
 }
 
@@ -124,5 +124,8 @@ module.exports = {
     select_categories: select_categories,
     insert_transaction: insert_transaction,
     insert_account: insert_account,
-    insert_category: insert_category
+    insert_category: insert_category,
+    delete_account: delete_account,
+    delete_category: delete_category,
+    delete_transaction: delete_transaction
 };
