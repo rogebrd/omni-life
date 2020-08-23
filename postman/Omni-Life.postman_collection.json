@@ -6,57 +6,18 @@
 	},
 	"item": [
 		{
-			"name": "Select Transactions",
+			"name": "Summary",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:3000/transactions/select",
+					"raw": "localhost:3000/summary",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"transactions",
-						"select"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Select Accounts",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:3000/accounts/select",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"accounts",
-						"select"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Select Categories",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:3000/categories/select",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"categories",
-						"select"
+						"summary"
 					]
 				}
 			},
@@ -162,6 +123,168 @@
 					"path": [
 						"categories",
 						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Select Transactions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/transactions/select",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"transactions",
+						"select"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Select Accounts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/accounts/select",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"accounts",
+						"select"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Select Categories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/categories/select",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"categories",
+						"select"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Account",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"account_id\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/accounts/delete",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"accounts",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Category",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"category_id\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/categories/delete",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"categories",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Transaction",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"category_id\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/categories/delete",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"categories",
+						"delete"
 					]
 				}
 			},
