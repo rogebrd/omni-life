@@ -1,313 +1,260 @@
 {
-	"info": {
-		"_postman_id": "177e284a-a0bb-4128-85e4-54571906bd9d",
-		"name": "Omni-Life",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-	},
-	"item": [
-		{
-			"name": "Summary",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:3000/summary",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"summary"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Add Transaction",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"date\": \"2020-08-22T14:22:19.831Z\",\n\t\"account_id\": 1,\n\t\"category_id\": 1,\n\t\"vendor\": \"Panera Bread\",\n\t\"amount\": 123.45\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:3000/transactions/add",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"transactions",
-						"add"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Add Account",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"account_name\": \"new account\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:3000/accounts/add",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"accounts",
-						"add"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Add Category",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"category_name\": \"Food\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:3000/categories/add",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"categories",
-						"add"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Select Transactions",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:3000/transactions/select",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"transactions",
-						"select"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Select Accounts",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:3000/accounts/select",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"accounts",
-						"select"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Select Categories",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:3000/categories/select",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"categories",
-						"select"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete Account",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"account_id\": 1\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:3000/accounts/delete",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"accounts",
-						"delete"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete Category",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"category_id\": 1\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:3000/categories/delete",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"categories",
-						"delete"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete Transaction",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"category_id\": 1\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:3000/categories/delete",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"categories",
-						"delete"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Close Database",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:3000/close",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"close"
-					]
-				}
-			},
-			"response": []
-		}
-	],
-	"protocolProfileBehavior": {}
+  "info": {
+    "_postman_id": "177e284a-a0bb-4128-85e4-54571906bd9d",
+    "name": "Omni-Life",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Summary",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:3000/summary",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["summary"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add Transaction",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"date\": \"2020-08-22T14:22:19.831Z\",\n\t\"account_id\": 1,\n\t\"category_id\": 1,\n\t\"vendor\": \"Panera Bread\",\n\t\"amount\": 123.45\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/transactions/add",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["transactions", "add"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add Account",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"account_name\": \"new account\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/accounts/add",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["accounts", "add"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add Category",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"category_name\": \"Food\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/categories/add",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["categories", "add"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Select Transactions",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:3000/transactions/select",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["transactions", "select"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Select Accounts",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:3000/accounts/select",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["accounts", "select"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Select Categories",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:3000/categories/select",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["categories", "select"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Account",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"account_id\": 1\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/accounts/delete",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["accounts", "delete"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Category",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"category_id\": 1\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/categories/delete",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["categories", "delete"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Transaction",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"category_id\": 1\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/categories/delete",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["categories", "delete"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Close Database",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:3000/close",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["close"]
+        }
+      },
+      "response": []
+    }
+  ],
+  "protocolProfileBehavior": {}
 }

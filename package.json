@@ -3,6 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "lint": "eslint --ext .js,.jsx,.ts .",
+    "lint-fix": "eslint --fix --ext .js,.jsx,.ts .",
+    "prettier-check": "prettier --check .",
+    "prettier-fix": "prettier --write .",
     "debug": "DEBUG=omni-life:* npm start",
     "start": "node ./bin/www"
   },
@@ -14,5 +18,11 @@
     "jade": "~1.11.0",
     "morgan": "~1.9.1",
     "sqlite3": "^5.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.7.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.0.5"
   }
 }
