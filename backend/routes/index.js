@@ -6,7 +6,7 @@ const { translate_error } = require("../errors/handler");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  res.render("index", { title: "Express" });
+  res.send("Homepage");
 });
 
 router.get("/summary", function (req, res, next) {
