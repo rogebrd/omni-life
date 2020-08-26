@@ -35,7 +35,7 @@ router.get("/select", function (req, res, next) {
     if (err) {
       translate_error(err, res);
     }
-    res.send(rows);
+    res.json(rows);
   });
 });
 
