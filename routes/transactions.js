@@ -14,6 +14,7 @@ router.post("/add", function (req, res, next) {
     req.body.category_id,
     req.body.vendor,
     req.body.amount,
+    req.body.file_name,
     (err) => {
       if (err) {
         translate_error(err, res);

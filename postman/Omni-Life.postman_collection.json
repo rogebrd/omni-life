@@ -33,7 +33,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n\t\"date\": \"2020-08-22T14:22:19.831Z\",\n\t\"account_id\": 1,\n\t\"category_id\": 1,\n\t\"vendor\": \"Panera Bread\",\n\t\"amount\": 123.45\n}",
+          "raw": "{\n\t\"date\": \"2020-08-22T14:22:19.831Z\",\n\t\"account_id\": 1,\n\t\"category_id\": 1,\n\t\"vendor\": \"Panera Bread\",\n\t\"amount\": 123.45,\n\t\"file_name\": \"/Users/mrogers8/workspace/omni-life/text.txt\"\n}",
           "options": {
             "raw": {
               "language": "json"
