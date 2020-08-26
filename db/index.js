@@ -9,7 +9,8 @@ db.run(
         categoryId INTEGER NOT NULL,
         date DATE NOT NULL,
         vendor STRING NOT NULL,
-        amount REAL NOT NULL
+        amount REAL NOT NULL,
+        file_name STRING
     );`,
   db_error_handler
 );
@@ -31,13 +32,14 @@ db.run(
 );
 
 class Transaction {
-  constructor(id, date, account_id, category_id, vendor, amount) {
+  constructor(id, date, account_id, category_id, vendor, amount, file_name) {
     this.id = id;
     this.date = date;
     this.account_id = account_id;
     this.category_id = category_id;
     this.vendor = vendor;
     this.amount = amount;
+    this.file_name = file_name;
   }
 }
 
@@ -63,12 +65,17 @@ function insert_transaction(
   category_id,
   vendor,
   amount,
+  file_name,
   callback
 ) {
+  const fs = require('fs');
+  if (!fs.existsSync(file_name)) {
+    file_name = null;
+  }
   db.run(
     `INSERT INTO transactions
-        (accountId, categoryId, date, vendor, amount)
-        VALUES(${account_id}, ${category_id}, "${date.toISOString()}", "${vendor}", ${amount});`,
+        (accountId, categoryId, date, vendor, amount, file_name)
+        VALUES(${account_id}, ${category_id}, "${date.toISOString()}", "${vendor}", ${amount}, "${file_name}");`,
     callback
   );
 }
