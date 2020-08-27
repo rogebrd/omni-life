@@ -30,17 +30,6 @@ db.run(
   db_error_handler
 );
 
-class Transaction {
-  constructor(id, date, account_id, category_id, vendor, amount) {
-    this.id = id;
-    this.date = date;
-    this.account_id = account_id;
-    this.category_id = category_id;
-    this.vendor = vendor;
-    this.amount = amount;
-  }
-}
-
 function select_transactions(callback) {
   db.all("SELECT * FROM transactions ORDER BY id DESC", callback);
 }

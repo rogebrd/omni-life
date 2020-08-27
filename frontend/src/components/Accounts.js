@@ -12,7 +12,6 @@ class Accounts extends React.Component {
         fetch("http://localhost:3001/accounts/select")
             .then(res => res.json())
             .then(res => {
-                console.log(res);
                 this.setState({
                     accounts: res
                 });
