@@ -24,29 +24,31 @@ class TransactionTable extends React.Component {
         if (transactions) {
             return (
                 <table>
-                    <tr>
-                        <td>
-                            Transaction Id
+                    <tbody>
+                        <tr>
+                            <td>
+                                Transaction Id
                         </td>
-                        <td>
-                            Date
+                            <td>
+                                Date
                         </td>
-                        <td>
-                            Account Id
+                            <td>
+                                Account Id
                         </td>
-                        <td>
-                            Category Id
+                            <td>
+                                Category Id
                         </td>
-                        <td>
-                            Vendor
+                            <td>
+                                Vendor
                         </td>
-                        <td>
-                            Amount
+                            <td>
+                                Amount
                         </td>
-                    </tr>
-                    {transactions.map(transaction => (
-                        <Transaction transaction={transaction} />
-                    ))}
+                        </tr>
+                        {transactions.map(transaction => (
+                            <Transaction transaction={transaction} />
+                        ))}
+                    </tbody>
                 </table>
             );
         }
