@@ -1,5 +1,6 @@
 import React from 'react';
 import Transaction from './Transaction';
+import axios from '../utils/Api';
 
 class TransactionTable extends React.Component {
     constructor(props) {
@@ -10,11 +11,10 @@ class TransactionTable extends React.Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:3001/transactions/select")
-            .then(res => res.json())
+        axios.get("transactions/select")
             .then(res => {
                 this.setState({
-                    transactions: res
+                    transactions: res.data
                 });
             });
     }

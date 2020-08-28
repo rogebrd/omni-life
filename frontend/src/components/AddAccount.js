@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from '../utils/Api';
 
 class AddAccount extends React.Component {
     constructor(props) {
@@ -12,22 +13,17 @@ class AddAccount extends React.Component {
     }
 
     handleChange(event) {
-        this.setState({ accountName: event.target.accountName });
+        this.setState({ accountName: event.target.value });
     }
 
     handleSubmit(event) {
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ account_name: this.state.accountName })
-        };
-        fetch('http://localhost:3001/accounts/add', requestOptions)
+        event.preventDefault();
+        axios.post('accounts/add', { account_name: this.state.accountName })
             .then(response => {
                 if (response.status !== 200) {
                     alert("Error adding Account!");
                 }
             });
-        event.preventDefault();
     }
 
     render() {

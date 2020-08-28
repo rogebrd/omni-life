@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from '../utils/Api';
 
 class AddTransaction extends React.Component {
     constructor(props) {
@@ -26,24 +27,18 @@ class AddTransaction extends React.Component {
     }
 
     handleSubmit(event) {
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                date: this.state.date.toISOString(),
-                account_id: this.state.accountId,
-                category_id: this.state.categoryId,
-                vendor: this.state.vendor,
-                amount: this.state.amount
-            })
-        };
-        fetch('http://localhost:3001/transactions/add', requestOptions)
-            .then(response => {
-                if (response.status !== 200) {
-                    alert("Error adding Transaction!");
-                }
-            });
         event.preventDefault();
+        axios.post('transactions/add', {
+            date: this.state.date.toISOString(),
+            account_id: this.state.accountId,
+            category_id: this.state.categoryId,
+            vendor: this.state.vendor,
+            amount: this.state.amount
+        }).then(response => {
+            if (response.status !== 200) {
+                alert("Error adding Transaction!");
+            }
+        });
     }
 
     render() {

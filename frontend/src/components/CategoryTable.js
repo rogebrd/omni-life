@@ -1,5 +1,6 @@
 import React from 'react';
 import Category from './Category';
+import axios from '../utils/Api';
 
 class CategoryTable extends React.Component {
     constructor(props) {
@@ -10,11 +11,10 @@ class CategoryTable extends React.Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:3001/categories/select")
-            .then(res => res.json())
+        axios.get("categories/select")
             .then(res => {
                 this.setState({
-                    categories: res
+                    categories: res.data
                 });
             });
     }

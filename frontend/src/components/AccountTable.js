@@ -1,5 +1,6 @@
 import React from 'react';
 import Account from './Account';
+import axios from '../utils/Api';
 
 class AccountTable extends React.Component {
     constructor(props) {
@@ -10,11 +11,10 @@ class AccountTable extends React.Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:3001/accounts/select")
-            .then(res => res.json())
+        axios.get("accounts/select")
             .then(res => {
                 this.setState({
-                    accounts: res
+                    accounts: res.data
                 });
             });
     }

@@ -10,20 +10,21 @@ import AddTransaction from './components/AddTransaction';
 function App() {
   return (
     <div className="App">
-      <div>
-        <h1>Transactions</h1>
-        <TransactionTable />
-        <AddTransaction />
+      <div className="AppHeader">
+        <h1>Omni-Life</h1>
       </div>
-      <div>
-        <h1>Categories</h1>
+      <div className="sidebar">
+        <h2>Categories</h2>
         <CategoryTable />
         <AddCategory />
-      </div>
-      <div>
-        <h1>Accounts</h1>
+        <h2>Accounts</h2>
         <AccountTable />
         <AddAccount />
+      </div>
+      <div className="content">
+        <h2>Transactions</h2>
+        <TransactionTable />
+        <AddTransaction />
       </div>
     </div>
   );

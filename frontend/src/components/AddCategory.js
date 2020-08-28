@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from '../utils/Api';
 
 class AddCategory extends React.Component {
     constructor(props) {
@@ -12,22 +13,17 @@ class AddCategory extends React.Component {
     }
 
     handleChange(event) {
-        this.setState({ categoryName: event.target.categoryName });
+        this.setState({ categoryName: event.target.value });
     }
 
     handleSubmit(event) {
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ category_name: this.state.categoryName })
-        };
-        fetch('http://localhost:3001/categories/add', requestOptions)
+        event.preventDefault();
+        axios.post('categories/add', { category_name: this.state.categoryName })
             .then(response => {
                 if (response.status !== 200) {
                     alert("Error adding Category!");
                 }
             });
-        event.preventDefault();
     }
 
     render() {

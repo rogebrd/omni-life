@@ -1,4 +1,4 @@
-db/transactions.db
+backend/db/transactions.db
 
 # Logs
 logs
