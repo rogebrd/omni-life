@@ -5,7 +5,7 @@ class AddTransaction extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            date: new Date(),
+            date: '',
             accountId: 0,
             categoryId: 0,
             vendor: '',
@@ -17,19 +17,14 @@ class AddTransaction extends React.Component {
     }
 
     handleChange(event) {
-        this.setState({
-            date: event.target.date,
-            accountId: event.target.accountId,
-            categoryId: event.target.categoryId,
-            vendor: event.target.vendor,
-            amount: event.target.amount
-        });
+        this.setState({ [event.target.name]: event.target.value });
     }
 
     handleSubmit(event) {
         event.preventDefault();
+        console.log(this.state);
         axios.post('transactions/add', {
-            date: this.state.date.toISOString(),
+            date: new Date(this.state.date).toISOString(),
             account_id: this.state.accountId,
             category_id: this.state.categoryId,
             vendor: this.state.vendor,
@@ -46,23 +41,23 @@ class AddTransaction extends React.Component {
             <form onSubmit={this.handleSubmit}>
                 <label>
                     Transaction Date:
-                    <input type="date" value={this.state.date} onChange={this.handleChange} />
+                    <input type="date" name="date" value={this.state.date} onChange={this.handleChange} />
                 </label>
                 <label>
                     Transaction Account Id:
-                    <input type="number" value={this.state.accountId} onChange={this.handleChange} />
+                    <input type="number" name="accountId" value={this.state.accountId} onChange={this.handleChange} />
                 </label>
                 <label>
                     Transaction Category Id:
-                    <input type="number" value={this.state.categoryId} onChange={this.handleChange} />
+                    <input type="number" name="categoryId" value={this.state.categoryId} onChange={this.handleChange} />
                 </label>
                 <label>
                     Transaction Vendor:
-                    <input type="text" value={this.state.vendor} onChange={this.handleChange} />
+                    <input type="text" name="vendor" value={this.state.vendor} onChange={this.handleChange} />
                 </label>
                 <label>
                     Transaction Amount:
-                    <input type="number" value={this.state.amount} onChange={this.handleChange} />
+                    <input type="number" name="amount" value={this.state.amount} onChange={this.handleChange} />
                 </label>
                 <input type="submit" value="Submit" />
             </form>
