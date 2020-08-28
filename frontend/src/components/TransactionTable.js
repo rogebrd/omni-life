@@ -24,7 +24,7 @@ class TransactionTable extends React.Component {
         if (transactions) {
             return (
                 <table>
-                    <tbody>
+                    <thead>
                         <tr>
                             <td>
                                 Transaction Id
@@ -45,11 +45,19 @@ class TransactionTable extends React.Component {
                                 Amount
                         </td>
                         </tr>
+                    </thead>
+                    <tbody>
                         {transactions.map(transaction => (
-                            <Transaction transaction={transaction} />
+                            <Transaction key={transaction.id} transaction={transaction} />
                         ))}
                     </tbody>
                 </table>
+            );
+        } else {
+            return (
+                <div>
+                    No Transactions found! Add a new one
+                </div>
             );
         }
     }

@@ -4,7 +4,7 @@ class AddTransaction extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            date: null,
+            date: new Date(),
             accountId: 0,
             categoryId: 0,
             vendor: '',
@@ -26,13 +26,29 @@ class AddTransaction extends React.Component {
     }
 
     handleSubmit(event) {
-        alert(event);
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                date: this.state.date.toISOString(),
+                account_id: this.state.accountId,
+                category_id: this.state.categoryId,
+                vendor: this.state.vendor,
+                amount: this.state.amount
+            })
+        };
+        fetch('http://localhost:3001/transactions/add', requestOptions)
+            .then(response => {
+                if (response.status !== 200) {
+                    alert("Error adding Transaction!");
+                }
+            });
         event.preventDefault();
     }
 
     render() {
         return (
-            <form action={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit}>
                 <label>
                     Transaction Date:
                     <input type="date" value={this.state.date} onChange={this.handleChange} />

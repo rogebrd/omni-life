@@ -16,13 +16,23 @@ class AddAccount extends React.Component {
     }
 
     handleSubmit(event) {
-        console.log(event);
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ account_name: this.state.accountName })
+        };
+        fetch('http://localhost:3001/accounts/add', requestOptions)
+            .then(response => {
+                if (response.status !== 200) {
+                    alert("Error adding Account!");
+                }
+            });
         event.preventDefault();
     }
 
     render() {
         return (
-            <form action={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit}>
                 <label>
                     Account Name:
                     <input type="text" value={this.state.accountName} onChange={this.handleChange} />
