@@ -2,44 +2,113 @@ const sqlite3 = require("sqlite3").verbose();
 
 let db = new sqlite3.Database("./db/transactions.db", db_error_handler);
 
-db.run(
-  `CREATE TABLE IF NOT EXISTS transactions(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        accountId INTEGER NOT NULL,
-        categoryId INTEGER NOT NULL,
-        date DATE NOT NULL,
-        vendor STRING NOT NULL,
-        amount REAL NOT NULL
-    );`,
-  db_error_handler
-);
+initialize_db();
 
-db.run(
-  `CREATE TABLE IF NOT EXISTS accounts(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name STRING NOT NULL
-    );`,
-  db_error_handler
-);
+function initialize_db() {
+  console.log("Initializing DB");
+  db.serialize(function () {
+    console.log("Creating transaction table");
+    db.run(
+      `CREATE TABLE IF NOT EXISTS transactions(
+          transaction_id INTEGER PRIMARY KEY AUTOINCREMENT,
+          account_id INTEGER NOT NULL,
+          category_id INTEGER NOT NULL,
+          date DATE NOT NULL,
+          vendor STRING NOT NULL,
+          amount REAL NOT NULL
+      );`,
+      db_error_handler
+    );
 
-db.run(
-  `CREATE TABLE IF NOT EXISTS categories(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name STRING NOT NULL
-    );`,
-  db_error_handler
-);
+    console.log("Creating accounts table");
+    db.run(
+      `CREATE TABLE IF NOT EXISTS accounts(
+          account_id INTEGER PRIMARY KEY AUTOINCREMENT,
+          name STRING NOT NULL,
+          account_type_id INTEGER NOT NULL
+      );`,
+      db_error_handler
+    );
+
+    console.log("Creating categories table");
+    db.run(
+      `CREATE TABLE IF NOT EXISTS categories(
+          category_id INTEGER PRIMARY KEY AUTOINCREMENT,
+          name STRING NOT NULL
+      );`,
+      db_error_handler
+    );
+
+    console.log("Creating account_types table");
+    db.run(
+      `CREATE TABLE IF NOT EXISTS account_types(
+      account_type_id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name STRING NOT NULL
+    )`,
+      db_error_handler
+    )
+
+    console.log("Inserting default account_Types");
+    db.run(
+      `INSERT INTO account_types
+      (name)
+      VALUES("Cash")`,
+      db_error_handler
+    )
+
+    db.run(
+      `INSERT INTO account_types
+      (name)
+      VALUES("Investment")`,
+      db_error_handler
+    )
+
+    db.run(
+      `INSERT INTO account_types
+      (name)
+      VALUES("Credit")`,
+      db_error_handler
+    );
+
+    console.log("Inserting default categories");
+    db.run(
+      `INSERT INTO categories
+      (name)
+      VALUES("Uncategorized")`
+    )
+  });
+}
 
 function select_transactions(callback) {
-  db.all("SELECT * FROM transactions ORDER BY id DESC", callback);
+  db.all(`SELECT
+  transaction_id AS id,
+          account_id,
+          category_id,
+          date,
+          vendor,
+          amount
+   FROM transactions 
+   ORDER BY id DESC`, callback);
 }
 
 function select_accounts(callback) {
-  db.all("SELECT * FROM accounts ORDER BY id DESC", callback);
+  db.all(`SELECT 
+    ac.account_id AS id, 
+    ac.name AS name, 
+    acty.name AS type
+  FROM accounts AS ac
+  INNER JOIN account_types AS acty
+  ON ac.account_type_id == acty.account_type_id
+  ORDER BY id DESC`,
+    callback);
 }
 
 function select_categories(callback) {
-  db.all("SELECT * FROM categories ORDER BY id DESC", callback);
+  db.all(`SELECT 
+  category_id AS id,
+  name
+  FROM categories 
+  ORDER BY id DESC`, callback);
 }
 
 function close(callback) {
@@ -56,17 +125,17 @@ function insert_transaction(
 ) {
   db.run(
     `INSERT INTO transactions
-        (accountId, categoryId, date, vendor, amount)
+        (account_id, category_id, date, vendor, amount)
         VALUES(${account_id}, ${category_id}, "${date.toISOString()}", "${vendor}", ${amount});`,
     callback
   );
 }
 
-function insert_account(account_name, callback) {
+function insert_account(account_name, account_type, callback) {
   db.run(
     `INSERT INTO accounts
-        (name)
-        VALUES("${account_name}")`,
+        (name, account_type_id)
+        VALUES("${account_name}", ${account_type})`,
     callback
   );
 }
