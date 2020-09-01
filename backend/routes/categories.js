@@ -12,8 +12,9 @@ router.post("/add", function (req, res, next) {
   db.insert_category(category, (err) => {
     if (err) {
       translate_error(err, res);
+    } else {
+      res.send("added!");
     }
-    res.send("added!");
   });
 });
 
@@ -22,8 +23,9 @@ router.post("/delete", function (req, res, next) {
   db.delete_category(category_id, (err) => {
     if (err) {
       translate_error(err, res);
+    } else {
+      res.send("removed");
     }
-    res.send("removed");
   });
 });
 
@@ -34,8 +36,9 @@ router.get("/select", function (req, res, next) {
   db.select_categories((err, rows) => {
     if (err) {
       translate_error(err, res);
+    } else {
+      res.json(rows);
     }
-    res.send(rows);
   });
 });
 

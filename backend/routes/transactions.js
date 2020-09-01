@@ -17,8 +17,9 @@ router.post("/add", function (req, res, next) {
     (err) => {
       if (err) {
         translate_error(err, res);
+      } else {
+        res.send("added!");
       }
-      res.send("added!");
     }
   );
 });
@@ -28,8 +29,9 @@ router.post("/delete", function (req, res, next) {
   db.delete_transaction(transaction_id, (err) => {
     if (err) {
       translate_error(err, res);
+    } else {
+      res.send("removed");
     }
-    res.send("removed");
   });
 });
 
@@ -40,18 +42,19 @@ router.get("/select", function (req, res, next) {
   db.select_transactions((err, rows) => {
     if (err) {
       translate_error(err, res);
+    } else {
+      results = rows.map((row) => {
+        return new Transaction(
+          row.id,
+          row.date,
+          row.account_id,
+          row.category_id,
+          row.vendor,
+          row.amount
+        );
+      });
+      res.json(results);
     }
-    results = rows.map((row) => {
-      return new Transaction(
-        row.id,
-        row.date,
-        row.accountId,
-        row.categoryId,
-        row.vendor,
-        row.amount
-      );
-    });
-    res.send(results);
   });
 });
 

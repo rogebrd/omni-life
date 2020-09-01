@@ -32,6 +32,9 @@ class AccountTable extends React.Component {
                             <td>
                                 Name
                             </td>
+                            <td>
+                                Type
+                            </td>
                         </tr>
                     </thead>
                     <tbody>
