@@ -9,11 +9,13 @@ const { translate_error } = require("../errors/handler");
 */
 router.post("/add", function (req, res, next) {
   var account = req.body.account_name;
-  db.insert_account(account, (err) => {
+  var type = req.body.account_type;
+  db.insert_account(account, type, (err) => {
     if (err) {
       translate_error(err, res);
+    } else {
+      res.send("added!");
     }
-    res.send("added!");
   });
 });
 
@@ -22,8 +24,9 @@ router.post("/delete", function (req, res, next) {
   db.delete_account(account_id, (err) => {
     if (err) {
       translate_error(err, res);
+    } else {
+      res.send("removed");
     }
-    res.send("removed");
   });
 });
 
@@ -34,8 +37,9 @@ router.get("/select", function (req, res, next) {
   db.select_accounts((err, rows) => {
     if (err) {
       translate_error(err, res);
+    } else {
+      res.json(rows);
     }
-    res.json(rows);
   });
 });
 

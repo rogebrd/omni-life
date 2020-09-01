@@ -5,6 +5,7 @@ function translate_error(err, res) {
     return;
   }
 
+  console.log(err);
   // convert error to HTTP error
   switch (err.code) {
     case "SQLITE_ERROR":

@@ -72,7 +72,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"account_name\": \"new account\"\n}",
+					"raw": "{\n\t\"account_name\": \"new account\",\n\t\"account_type\": 1\n}",
 					"options": {
 						"raw": {
 							"language": "json"

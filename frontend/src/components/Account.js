@@ -18,6 +18,9 @@ class Account extends React.Component {
                 <td>
                     {account.name}
                 </td>
+                <td>
+                    {account.type}
+                </td>
             </tr>
         );
     }
