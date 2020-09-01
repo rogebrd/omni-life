@@ -1,5 +1,6 @@
 import React from 'react';
 import Transaction from './Transaction';
+import axios from '../utils/Api';
 
 class TransactionTable extends React.Component {
     constructor(props) {
@@ -10,11 +11,10 @@ class TransactionTable extends React.Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:3001/transactions/select")
-            .then(res => res.json())
+        axios.get("transactions/select")
             .then(res => {
                 this.setState({
-                    transactions: res
+                    transactions: res.data
                 });
             });
     }
@@ -24,30 +24,40 @@ class TransactionTable extends React.Component {
         if (transactions) {
             return (
                 <table>
-                    <tr>
-                        <td>
-                            Transaction Id
+                    <thead>
+                        <tr>
+                            <td>
+                                Transaction Id
                         </td>
-                        <td>
-                            Date
+                            <td>
+                                Date
                         </td>
-                        <td>
-                            Account Id
+                            <td>
+                                Account Id
                         </td>
-                        <td>
-                            Category Id
+                            <td>
+                                Category Id
                         </td>
-                        <td>
-                            Vendor
+                            <td>
+                                Vendor
                         </td>
-                        <td>
-                            Amount
+                            <td>
+                                Amount
                         </td>
-                    </tr>
-                    {transactions.map(transaction => (
-                        <Transaction transaction={transaction} />
-                    ))}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {transactions.map(transaction => (
+                            <Transaction key={transaction.id} transaction={transaction} />
+                        ))}
+                    </tbody>
                 </table>
+            );
+        } else {
+            return (
+                <div>
+                    No Transactions found! Add a new one
+                </div>
             );
         }
     }
