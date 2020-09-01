@@ -55,4 +55,15 @@ router.get("/select", function (req, res, next) {
   });
 });
 
+class Transaction {
+  constructor(id, date, account_id, category_id, vendor, amount) {
+    this.id = id;
+    this.date = date;
+    this.account_id = account_id;
+    this.category_id = category_id;
+    this.vendor = vendor;
+    this.amount = amount;
+  }
+}
+
 module.exports = router;
