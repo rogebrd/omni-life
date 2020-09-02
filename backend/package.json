@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "test": "npm run lint && npm run prettier",
-    "lint": "eslint --ext .js,.jsx,.ts, .",
-    "lint-fix": "eslint --fix --ext .js,.jsx,.ts, .",
-    "prettier": "prettylint *.{js,jsx,ts}",
-    "prettier-fix": "prettier --write *.{js,jsx,ts}",
+    "lint": "eslint --ext .js .",
+    "lint-fix": "eslint --fix --ext .js .",
+    "prettier": "prettylint *.js",
+    "prettier-fix": "prettier --write *.js",
     "debug": "DEBUG=omni-life:* npm start",
     "start": "node ./bin/www"
   },

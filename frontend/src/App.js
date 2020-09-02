@@ -9,11 +9,11 @@ import AddTransaction from './components/AddTransaction';
 
 function App() {
   return (
-    <div className="App">
-      <div className="AppHeader">
+    <div className='App'>
+      <div className='AppHeader'>
         <h1>Omni-Life</h1>
       </div>
-      <div className="sidebar">
+      <div className='sidebar'>
         <h2>Categories</h2>
         <CategoryTable />
         <AddCategory />
@@ -21,7 +21,7 @@ function App() {
         <AccountTable />
         <AddAccount />
       </div>
-      <div className="content">
+      <div className='content'>
         <h2>Transactions</h2>
         <TransactionTable />
         <AddTransaction />
