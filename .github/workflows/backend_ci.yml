@@ -2,6 +2,7 @@ name: Backend CI
 on:
   pull_request:
 
+runs-on: ${{ matrix.os }}
 strategy:
   matrix:
     os: [ubuntu-latest, macos-latest]
@@ -13,7 +14,6 @@ strategy:
         experimental: true
 jobs:
   CI:
-    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
       - name: Setup Node.js environment
