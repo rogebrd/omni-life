@@ -4,18 +4,12 @@ on:
 
 jobs:
   CI:
+    continue-on-error: true
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
-        node: [10, 11, 12, 13, 14]
-        include:
-        - node: node
-          os: ubuntu-latest
-          experimental: true
-        - node: lts/*
-          os: ubuntu-latest
-          experimental: true
+        node: [10, 11, 12, 13, 14, node-latest]
     steps:
       - uses: actions/checkout@v2
       - name: Setup Node.js environment
