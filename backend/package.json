@@ -3,10 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "lint": "eslint --ext .js,.jsx,.ts .",
-    "lint-fix": "eslint --fix --ext .js,.jsx,.ts .",
-    "prettier-check": "prettier --check .",
-    "prettier-fix": "prettier --write .",
+    "test": "npm run lint && npm run prettier",
+    "lint": "eslint --ext .js,.jsx,.ts, .",
+    "lint-fix": "eslint --fix --ext .js,.jsx,.ts, .",
+    "prettier": "prettylint *.{js,jsx,ts}",
+    "prettier-fix": "prettier --write *.{js,jsx,ts}",
     "debug": "DEBUG=omni-life:* npm start",
     "start": "node ./bin/www"
   },
@@ -23,6 +24,7 @@
     "eslint": "^7.7.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "prettier": "^2.0.5"
+    "prettier": "^2.1.1",
+    "prettylint": "^1.0.0"
   }
 }

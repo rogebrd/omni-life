@@ -1,0 +1,17 @@
+language: node_js
+dist:
+  xenial
+os:
+  linux
+node_js:
+  - 10
+  - 11
+  - 12
+  - 13
+  - 14
+  - node
+  - lts/*
+install: 
+  cd $TRAVIS_BUILD_DIR/backend && npm install
+script: 
+  cd $TRAVIS_BUILD_DIR/backend && npm test

@@ -1,3 +1,5 @@
+# OMNI - LIFE
+
 # Basic Setup
 Backend runs on localhost:3001
 Frontend runs on localhost:3000

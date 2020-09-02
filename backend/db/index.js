@@ -46,7 +46,7 @@ function initialize_db() {
       name STRING NOT NULL
     )`,
       db_error_handler
-    )
+    );
 
     console.log("Inserting default account_Types");
     db.run(
@@ -54,14 +54,14 @@ function initialize_db() {
       (name)
       VALUES("Cash")`,
       db_error_handler
-    )
+    );
 
     db.run(
       `INSERT INTO account_types
       (name)
       VALUES("Investment")`,
       db_error_handler
-    )
+    );
 
     db.run(
       `INSERT INTO account_types
@@ -75,12 +75,13 @@ function initialize_db() {
       `INSERT INTO categories
       (name)
       VALUES("Uncategorized")`
-    )
+    );
   });
 }
 
 function select_transactions(callback) {
-  db.all(`SELECT
+  db.all(
+    `SELECT
   transaction_id AS id,
           account_id,
           category_id,
@@ -88,11 +89,14 @@ function select_transactions(callback) {
           vendor,
           amount
    FROM transactions 
-   ORDER BY id DESC`, callback);
+   ORDER BY id DESC`,
+    callback
+  );
 }
 
 function select_accounts(callback) {
-  db.all(`SELECT 
+  db.all(
+    `SELECT 
     ac.account_id AS id, 
     ac.name AS name, 
     acty.name AS type
@@ -100,15 +104,19 @@ function select_accounts(callback) {
   INNER JOIN account_types AS acty
   ON ac.account_type_id == acty.account_type_id
   ORDER BY id DESC`,
-    callback);
+    callback
+  );
 }
 
 function select_categories(callback) {
-  db.all(`SELECT 
+  db.all(
+    `SELECT 
   category_id AS id,
   name
   FROM categories 
-  ORDER BY id DESC`, callback);
+  ORDER BY id DESC`,
+    callback
+  );
 }
 
 function close(callback) {
