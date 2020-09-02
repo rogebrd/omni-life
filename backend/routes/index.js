@@ -1,15 +1,15 @@
-var express = require("express");
+var express = require('express');
 var router = express.Router();
 
-var db = require("../db");
-const { translate_error } = require("../errors/handler");
+var db = require('../db');
+const { translate_error } = require('../errors/handler');
 
 /* GET home page. */
-router.get("/", function (req, res, next) {
-  res.send("Homepage");
+router.get('/', function (req, res, next) {
+  res.send('Homepage');
 });
 
-router.get("/summary", function (req, res, next) {
+router.get('/summary', function (req, res, next) {
   db.select_accounts((err, rows) => {
     if (err) {
       translate_error(err, res);
@@ -34,12 +34,12 @@ router.get("/summary", function (req, res, next) {
   });
 });
 
-router.get("/close", function (req, res, next) {
+router.get('/close', function (req, res, next) {
   db.close((err) => {
     if (err) {
       translate_error(err, res);
     } else {
-      res.send("close success");
+      res.send('close success');
     }
   });
 });

@@ -3,6 +3,7 @@ module.exports = {
     node: false,
     es6: true,
   },
-  plugins: ["prettier"],
-  extends: ["plugin:prettier/recommended"],
+  rules: {
+    'quotes': [2, 'single'],
+  }
 };

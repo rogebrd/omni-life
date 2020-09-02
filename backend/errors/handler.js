@@ -1,4 +1,4 @@
-const createHttpError = require("http-errors");
+const createHttpError = require('http-errors');
 
 function translate_error(err, res) {
   if (!err) {
@@ -8,7 +8,7 @@ function translate_error(err, res) {
   console.log(err);
   // convert error to HTTP error
   switch (err.code) {
-    case "SQLITE_ERROR":
+    case 'SQLITE_ERROR':
       res.statusCode = 500;
       res.statusMessage = err.code;
       break;

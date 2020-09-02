@@ -10,8 +10,6 @@ module.exports = {
     },
   },
   rules: {
-    'prettier/prettier': ['error', { singleQuote: true }],
-  },
-  plugins: ['prettier'],
-  extends: ['plugin:prettier/recommended'],
+    'quotes': [2, 'single'],
+  }
 };

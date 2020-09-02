@@ -3,11 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "test": "npm run lint && npm run prettier",
+    "test": "npm run lint",
     "lint": "eslint --ext .js .",
     "lint-fix": "eslint --fix --ext .js .",
-    "prettier": "prettylint *.js",
-    "prettier-fix": "prettier --write *.js",
     "debug": "DEBUG=omni-life:* npm start",
     "start": "node ./bin/www"
   },
@@ -21,10 +19,6 @@
     "sqlite3": "^5.0.0"
   },
   "devDependencies": {
-    "eslint": "^7.7.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-prettier": "^3.1.4",
-    "prettier": "^2.1.1",
-    "prettylint": "^1.0.0"
+    "eslint": "^7.7.0"
   }
 }
