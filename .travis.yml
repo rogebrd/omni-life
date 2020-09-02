@@ -1,4 +1,8 @@
 language: node_js
+dist:
+  xenial
+os:
+  linux
 node_js:
   - 10
   - 11
@@ -8,8 +12,8 @@ node_js:
   - node
   - lts/*
 install: 
-  cd backend/
+  cd backend/ && 
   npm install
 script: 
-  cd backend/
+  cd backend/ &&
   npm test
