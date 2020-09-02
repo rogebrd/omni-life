@@ -3,26 +3,31 @@ on:
   pull_request:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  CI:
+    continue-on-error: true
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        node: [10, 11, 12, 13, 14]
     steps:
       - uses: actions/checkout@v2
       - name: Setup Node.js environment
         uses: actions/setup-node@v1.4.3
         with:
-          node-version: '10'
+          node-version: ${{ matrix.node }}
       - name: Install Backend
-        run:
-          cd backend/ &&
-          npm install &&
+        run: |
+          cd backend/
+          npm install
           cd ..
       - name: Run Linter
-        run:
-          cd backend/ &&
-          npm run lint &&
+        run: |
+          cd backend/
+          npm run lint
           cd ..
       - name: Run Unit Tests
-        run:
-          cd backend/ &&
-          npm test &&
+        run: |
+          cd backend/
+          npm test
           cd ..
