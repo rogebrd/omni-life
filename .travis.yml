@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  - 10
+  - 11
+  - 12
+  - 13
+  - 14
+  - node
+  - lts/*
+install: 
+  cd backend/
+  npm install
+script: 
+  cd backend/
+  npm test
