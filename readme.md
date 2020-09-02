@@ -1,4 +1,5 @@
 # OMNI - LIFE
+[![codecov](https://codecov.io/gh/rogebrd/omni-life/branch/master/graph/badge.svg)](https://codecov.io/gh/rogebrd/omni-life)
 
 # Basic Setup
 Backend runs on localhost:3001
