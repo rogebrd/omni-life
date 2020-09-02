@@ -1,0 +1,28 @@
+name: Publish Backend CodeCov
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: 0 0 * * *
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v1.4.3
+        with:
+          node-version: '10'
+      - name: Install Backend
+        run:
+          cd backend/ &&
+          npm install &&
+          cd ..
+      - name: Generate Coverage
+        run:
+          cd backend/ &&
+          npm run coverage &&
+          npm run codecov &&
+          cd ..
