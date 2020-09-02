@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
-        node: [10, 11, 12, 13, 14, node-latest]
+        node: [10, 11, 12, 13, 14, latest]
     steps:
       - uses: actions/checkout@v2
       - name: Setup Node.js environment
