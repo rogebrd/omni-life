@@ -12,8 +12,7 @@ node_js:
   - node
   - lts/*
 install: 
-  cd backend/ && 
-  npm install
+  ls
 script: 
   cd backend/ &&
   npm test
