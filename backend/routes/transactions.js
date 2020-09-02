@@ -1,13 +1,13 @@
-var express = require("express");
+var express = require('express');
 var router = express.Router();
 
-var db = require("../db");
-const { translate_error } = require("../errors/handler");
+var db = require('../db');
+const { translate_error } = require('../errors/handler');
 
 /* 
     POST ROUTES 
 */
-router.post("/add", function (req, res, next) {
+router.post('/add', function (req, res, next) {
   db.insert_transaction(
     new Date(req.body.date),
     req.body.account_id,
@@ -18,19 +18,19 @@ router.post("/add", function (req, res, next) {
       if (err) {
         translate_error(err, res);
       } else {
-        res.send("added!");
+        res.send('added!');
       }
     }
   );
 });
 
-router.post("/delete", function (req, res, next) {
+router.post('/delete', function (req, res, next) {
   var transaction_id = req.body.transaction_id;
   db.delete_transaction(transaction_id, (err) => {
     if (err) {
       translate_error(err, res);
     } else {
-      res.send("removed");
+      res.send('removed');
     }
   });
 });
@@ -38,7 +38,7 @@ router.post("/delete", function (req, res, next) {
 /*
     GET ROUTES
 */
-router.get("/select", function (req, res, next) {
+router.get('/select', function (req, res, next) {
   db.select_transactions((err, rows) => {
     if (err) {
       translate_error(err, res);
