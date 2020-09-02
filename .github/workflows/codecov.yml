@@ -17,12 +17,12 @@ jobs:
           node-version: '10'
       - name: Install Backend
         run:
-          cd backend/
-          npm install
+          cd backend/ &&
+          npm install &&
           cd ..
       - name: Generate Coverage
         run:
-          cd backend/
-          npm run coverage
-          npm run codecov
+          cd backend/ &&
+          npm run coverage &&
+          npm run codecov &&
           cd ..
