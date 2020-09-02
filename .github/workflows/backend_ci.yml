@@ -1,9 +1,6 @@
-name: Publish Backend CodeCov
+name: Backend CI
 on:
-  push:
   pull_request:
-  schedule:
-    - cron: 0 0 * * *
 
 jobs:
   build:
@@ -20,9 +17,13 @@ jobs:
           cd backend/ &&
           npm install &&
           cd ..
-      - name: Generate Coverage
+      - name: Run Linter
         run:
           cd backend/ &&
-          npm run coverage &&
-          npm run codecov &&
+          npm run lint &&
+          cd ..
+      - name: Run Unit Tests
+        run:
+          cd backend/ &&
+          npm test &&
           cd ..
