@@ -12,6 +12,8 @@ node_js:
   - node
   - lts/*
 install: 
-  cd $TRAVIS_BUILD_DIR/backend && npm install
+  cd $TRAVIS_BUILD_DIR/backend && npm install && 
+  cd $TRAVIS_BUILD_DIR/frontend && npm install
 script: 
-  cd $TRAVIS_BUILD_DIR/backend && npm test
+  cd $TRAVIS_BUILD_DIR/backend && npm test &&
+  cd $TRAVIS_BUILD_DIR/frontend && npm test

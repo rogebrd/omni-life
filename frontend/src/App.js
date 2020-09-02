@@ -1,11 +1,11 @@
-import React from 'react';
-import TransactionTable from './components/TransactionTable';
-import AccountTable from './components/AccountTable';
-import CategoryTable from './components/CategoryTable';
-import AddAccount from './components/AddAccount';
-import './App.css';
-import AddCategory from './components/AddCategory';
-import AddTransaction from './components/AddTransaction';
+import React from "react";
+import TransactionTable from "./components/TransactionTable";
+import AccountTable from "./components/AccountTable";
+import CategoryTable from "./components/CategoryTable";
+import AddAccount from "./components/AddAccount";
+import "./App.css";
+import AddCategory from "./components/AddCategory";
+import AddTransaction from "./components/AddTransaction";
 
 function App() {
   return (
