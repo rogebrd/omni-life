@@ -5,7 +5,6 @@
   "scripts": {
     "test": "mocha test/unit/*.js",
     "coverage": "nyc --reporter=lcov npm run test",
-    "codecov": "codecov -F backend",
     "lint": "eslint --ext .js .",
     "lint-fix": "eslint --fix --ext .js .",
     "debug": "DEBUG=omni-life:* npm start",

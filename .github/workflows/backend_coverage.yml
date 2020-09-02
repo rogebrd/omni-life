@@ -23,5 +23,5 @@ jobs:
         run:
           cd backend/ &&
           npm run coverage &&
-          npm run codecov -t ${{ secrets.CODECOV_UPLOAD_TOKEN }} &&
+          codecov -t ${{ secrets.CODECOV_UPLOAD_TOKEN }} -F backend&&
           cd ..
