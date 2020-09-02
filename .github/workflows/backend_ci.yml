@@ -9,7 +9,13 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest]
         node: [10, 11, 12, 13, 14]
-      
+        include:
+        - node: node
+          os: ubuntu-latest
+          experimental: true
+        - node: lts/*
+          os: ubuntu-latest
+          experimental: true
     steps:
       - uses: actions/checkout@v2
       - name: Setup Node.js environment
