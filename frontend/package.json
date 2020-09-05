@@ -64,7 +64,9 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "npm run lint && node scripts/test.js",
+    "test": "node scripts/test.js --watchAll",
+    "coverage": "nyc --reporter=lcov node scripts/test.js",
+    "report": "nyc report --reporter=lcov --reporter=text",
     "lint": "eslint --ext .js .",
     "lint-fix": "eslint --fix --ext .js ."
   },
@@ -136,6 +138,7 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^7.8.1"
+    "eslint": "^7.8.1",
+    "nyc": "^15.1.0"
   }
 }
