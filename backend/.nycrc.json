@@ -1,6 +1,7 @@
 {
     "all": true,
     "include": [
+        "app.js",
         "db/*.js",
         "errors/*.js",
         "routes/*.js"
