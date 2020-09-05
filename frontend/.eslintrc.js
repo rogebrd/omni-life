@@ -1,6 +1,6 @@
 module.exports = {
   env: {
-    node: true,
+    node: false,
     es6: true,
   },
   parserOptions: {
