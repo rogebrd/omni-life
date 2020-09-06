@@ -48,6 +48,7 @@ app.use(function (err, req, res, next) {
 });
 
 // Setup DB based off env flag
+console.log(process.env.SETUP_DB);
 if (process.env.SETUP_DB !== 0) {
   console.log('Initializing DB');
   db.initialize_db(db_file);
