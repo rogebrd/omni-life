@@ -3,7 +3,6 @@ const sqlite3 = require('sqlite3').verbose();
 let db;
 
 function initialize_db(db_file, callback) {
-  console.log('Initializing DB');
   open(db_file, (err) => {
     if (err) throw err;
     db.serialize(() => {

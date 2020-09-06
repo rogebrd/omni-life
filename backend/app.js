@@ -47,6 +47,10 @@ app.use(function (err, req, res, next) {
   res.send('error');
 });
 
-//db.initialize_db(db_file);
+// Setup DB based off env flag
+if (process.env.SETUP_DB) {
+  console.log('Initializing DB');
+  db.initialize_db(db_file);
+}
 
 module.exports = app;

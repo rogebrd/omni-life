@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "test": "mocha test/unit/*.js",
+    "test": "SETUP_DB=0 mocha test/unit/*.js",
     "coverage": "nyc --reporter=lcov npm run test",
     "report": "nyc report --reporter=lcov --reporter=text",
     "lint": "eslint --ext .js .",
