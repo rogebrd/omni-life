@@ -8,7 +8,7 @@
     "report": "nyc report --reporter=lcov --reporter=text",
     "lint": "eslint --ext .js .",
     "lint-fix": "eslint --fix --ext .js .",
-    "debug": "DEBUG=omni-life:* npm start",
+    "debug": "SETUP_DB=1 DEBUG=omni-life:* npm start",
     "start": "node ./bin/www"
   },
   "dependencies": {
