@@ -4,6 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
+const db = require('./db');
+
+// Env Variables
+const db_file = require('./utils/env').db_file;
 
 // Namespace Routers
 var indexRouter = require('./routes/index');
@@ -42,5 +46,7 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.send('error');
 });
+
+//db.initialize_db(db_file);
 
 module.exports = app;

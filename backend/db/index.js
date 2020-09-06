@@ -1,81 +1,78 @@
 const sqlite3 = require('sqlite3').verbose();
 
-let db = new sqlite3.Database('./db/transactions.db', db_error_handler);
+let db;
 
-initialize_db();
-
-function initialize_db() {
+function initialize_db(db_file, callback) {
   console.log('Initializing DB');
-  db.serialize(function () {
-    console.log('Creating transaction table');
-    db.run(
-      `CREATE TABLE IF NOT EXISTS transactions(
-          transaction_id INTEGER PRIMARY KEY AUTOINCREMENT,
-          account_id INTEGER NOT NULL,
-          category_id INTEGER NOT NULL,
-          date DATE NOT NULL,
-          vendor STRING NOT NULL,
-          amount REAL NOT NULL
-      );`,
-      db_error_handler
-    );
+  open(db_file, (err) => {
+    if (err) throw err;
+    db.serialize(() => {
+      db.run(
+        `CREATE TABLE IF NOT EXISTS transactions(
+            transaction_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            account_id INTEGER NOT NULL,
+            category_id INTEGER NOT NULL,
+            date DATE NOT NULL,
+            vendor STRING NOT NULL,
+            amount REAL NOT NULL
+        );`,
+        db_error_handler
+      );
 
-    console.log('Creating accounts table');
-    db.run(
-      `CREATE TABLE IF NOT EXISTS accounts(
-          account_id INTEGER PRIMARY KEY AUTOINCREMENT,
-          name STRING NOT NULL,
-          account_type_id INTEGER NOT NULL
-      );`,
-      db_error_handler
-    );
+      db.run(
+        `CREATE TABLE IF NOT EXISTS accounts(
+            account_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name STRING NOT NULL,
+            account_type_id INTEGER NOT NULL
+        );`,
+        db_error_handler
+      );
 
-    console.log('Creating categories table');
-    db.run(
-      `CREATE TABLE IF NOT EXISTS categories(
-          category_id INTEGER PRIMARY KEY AUTOINCREMENT,
-          name STRING NOT NULL
-      );`,
-      db_error_handler
-    );
+      db.run(
+        `CREATE TABLE IF NOT EXISTS categories(
+            category_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name STRING NOT NULL
+        );`,
+        db_error_handler
+      );
 
-    console.log('Creating account_types table');
-    db.run(
-      `CREATE TABLE IF NOT EXISTS account_types(
-      account_type_id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name STRING NOT NULL
-    )`,
-      db_error_handler
-    );
+      db.run(
+        `CREATE TABLE IF NOT EXISTS account_types(
+        account_type_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name STRING NOT NULL
+      )`,
+        db_error_handler
+      );
 
-    console.log('Inserting default account_Types');
-    db.run(
-      `INSERT INTO account_types
-      (name)
-      VALUES('Cash')`,
-      db_error_handler
-    );
+      db.run(
+        `INSERT INTO account_types
+        (name)
+        VALUES('Cash')`,
+        db_error_handler
+      );
 
-    db.run(
-      `INSERT INTO account_types
-      (name)
-      VALUES('Investment')`,
-      db_error_handler
-    );
+      db.run(
+        `INSERT INTO account_types
+        (name)
+        VALUES('Investment')`,
+        db_error_handler
+      );
 
-    db.run(
-      `INSERT INTO account_types
-      (name)
-      VALUES('Credit')`,
-      db_error_handler
-    );
+      db.run(
+        `INSERT INTO account_types
+        (name)
+        VALUES('Credit')`,
+        db_error_handler
+      );
 
-    console.log('Inserting default categories');
-    db.run(
-      `INSERT INTO categories
-      (name)
-      VALUES('Uncategorized')`
-    );
+      db.run(
+        `INSERT INTO categories
+        (name)
+        VALUES('Uncategorized')`
+      );
+
+      if (callback) callback();
+    });
   });
 }
 
@@ -123,6 +120,10 @@ function close(callback) {
   db.close(callback);
 }
 
+function open(db_file, callback) {
+  db = new sqlite3.Database(db_file, callback);
+}
+
 function insert_transaction(
   date,
   account_id,
@@ -158,15 +159,15 @@ function insert_category(category_name, callback) {
 }
 
 function delete_account(account_id, callback) {
-  db.run(`DELETE FROM accounts WHERE id = ${account_id}`, callback);
+  db.run(`DELETE FROM accounts WHERE account_id = ${account_id}`, callback);
 }
 
 function delete_transaction(transaction_id, callback) {
-  db.run(`DELETE FROM transactions WHERE id = ${transaction_id}`, callback);
+  db.run(`DELETE FROM transactions WHERE transaction_id = ${transaction_id}`, callback);
 }
 
 function delete_category(category_id, callback) {
-  db.run(`DELETE FROM categories WHERE id = ${category_id}`, callback);
+  db.run(`DELETE FROM categories WHERE category_id = ${category_id}`, callback);
 }
 
 function db_error_handler(err) {
@@ -177,6 +178,8 @@ function db_error_handler(err) {
 
 module.exports = {
   close: close,
+  open: open,
+  initialize_db: initialize_db,
   select_transactions: select_transactions,
   select_accounts: select_accounts,
   select_categories: select_categories,
